@@ -7,13 +7,60 @@ on:
     branches: [ "master" ]
 
 jobs:
+#   # build:
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #   - uses: actions/checkout@v3
+#   #   - name: apt update
+#   #     run: apt update
+#   #   - name: set up deps
+#   #     run: apt install make g++ libxml2-dev libzip-dev libsdl1.2-dev libsdl-ttf2.0-dev libsdl-image1.2-dev -y
+#   #   - name: make
+#   #     run: make -j
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: apt update
-      run: sudo apt update
-    - name: set up deps
-      run: sudo apt install make g++ libxml2-dev libzip-dev libsdl1.2-dev libsdl-ttf2.0-dev libsdl-image1.2-dev -y
-    - name: make
-      run: make -j
+      with: 
+          image: jondbell/union-miyoomini-toolchain:latest
+          run: |
+            apt update
+            make -j
+    # - name: apt update
+    #   run: apt update
+    # - name: make
+    #   run: make -j
+
+      
+
+
+  # build:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #   image: jondbell/union-miyoomini-toolchain:latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: apt update
+  #     run: apt update
+  #   - name: make
+  #     run: make -j
+    # - name: Run tests
+    #   run: docker 
+
+
+# on: [push]
+
+# jobs:
+#   hello_world_job:
+#     runs-on: ubuntu-latest
+#     name: A job to say hello
+#     steps:
+#       - name: Hello world action step
+#         id: hello
+#         uses: actions/hello-world-docker-action@v2
+#         with:
+#           who-to-greet: 'Mona the Octocat'
+#       # Use the output from the `hello` step
+#       - name: Get the output time
+#         run: echo "The time was ${{ steps.hello.outputs.time }}"
+
